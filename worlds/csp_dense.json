@@ -1,0 +1,29 @@
+{
+  "name": "csp_dense",
+  "world_size": 1.5,
+  "_comment": "Dense obstacle field for the CSP module, iterated twice. First attempt (8-10 blocks around the edges) barely changed the joint success rate versus the default map (~56% -> ~33%) because the extra area wasn't placed where the robot-spawn and food-distance constraints actually overlap. This version tiles a 3-column x 4-row grid of blocks across the robot's own spawn band (pixels x:100-700, y:40-258, kept 7px clear of the food-safe box starting at y:280) plus the same outer-ring blocks as before. Measured joint success rate (obstacle-free AND within the 100-300px distance band, over 300k random two-variable draws): ~6.8%, down from ~56% on default -- roughly 8x fewer valid random draws, finally a large enough gap for backtracking-vs-generate-and-test to show a real difference. See TESTING.md for the full iteration story, including the design that looked promising (1.8%) but turned out to have a bug (an obstacle overlapping the food-safe box by a few pixels, invalidating the measurement).",
+  "rectangles": [
+    {"pos": [-0.525, -0.5906], "size": [0.3, 0.1687]},
+    {"pos": [0.5625, -0.5906], "size": [0.3, 0.1687]},
+    {"pos": [-0.525, 0.2156], "size": [0.3, 0.1687]},
+    {"pos": [0.5625, 0.2156], "size": [0.3, 0.1687]},
+    {"pos": [0.0, 0.2344], "size": [0.2625, 0.1312]},
+    {"pos": [-0.5906, -0.1875], "size": [0.1687, 0.2625]},
+    {"pos": [0.5906, -0.1875], "size": [0.1687, 0.2625]},
+    {"pos": [-0.4031, -0.6375], "size": [0.3187, 0.075]},
+    {"pos": [-0.0469, -0.6375], "size": [0.3187, 0.075]},
+    {"pos": [0.3094, -0.6375], "size": [0.3187, 0.075]},
+    {"pos": [-0.4031, -0.525], "size": [0.3187, 0.075]},
+    {"pos": [-0.0469, -0.525], "size": [0.3187, 0.075]},
+    {"pos": [0.3094, -0.525], "size": [0.3187, 0.075]},
+    {"pos": [-0.4031, -0.4125], "size": [0.3187, 0.075]},
+    {"pos": [-0.0469, -0.4125], "size": [0.3187, 0.075]},
+    {"pos": [0.3094, -0.4125], "size": [0.3187, 0.075]},
+    {"pos": [-0.4031, -0.3037], "size": [0.3187, 0.075]},
+    {"pos": [-0.0469, -0.3037], "size": [0.3187, 0.075]},
+    {"pos": [0.3094, -0.3037], "size": [0.3187, 0.075]}
+  ],
+  "food_pos": [0.0, -0.0625]
+}
+
+

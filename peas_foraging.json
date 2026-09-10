@@ -1,0 +1,68 @@
+{
+  "_readme": "PEAS analysis for the 'training wheels' course level (single-robot foraging). Each field has a 'wired' flag: true means editing 'value' actually changes the simulator's behavior through edu_env.make_edu_env(); false means the field is a faithful description of the task, but there is no dial in the code you can turn to change it. This distinction is intentional -- see training_wheels/README.md for why.",
+
+  "task": "single_agent_foraging",
+
+  "performance_measure": {
+    "value": ["reach_food", "avoid_collisions", "minimize_time"],
+    "wired": false,
+    "note": "Descriptive only. ForagingEnv.step() always returns reward=0.0; there is no scalar reward signal wired into the environment at this level. The utility-based agent (later module) computes its own utility from the observation/info, entirely outside the environment."
+  },
+
+  "observability": {
+    "value": "partial",
+    "wired": false,
+    "note": "True in the sense that each robot only sees 8 range-limited proximity sensors plus food bearing/odor -- but this is an emergent property of _get_obs_single(), not a parameter you can flip. There is no 'observability' switch in ForagingEnvConfig."
+  },
+
+  "determinism": {
+    "value": "stochastic",
+    "wired": false,
+    "note": "Sensor readings have injected Gaussian noise (see the noise injection in _get_obs_single). True, but not a single named toggle -- the noise amount is hardcoded in the environment source, not exposed as a config field."
+  },
+
+  "episodic": {
+    "value": false,
+    "wired": false,
+    "note": "Each step's observation depends on the robot's position from previous steps (a sequential environment), not just the current instant. This is a property of the physics, not something a config field controls."
+  },
+
+  "dynamics": {
+    "value": "static_per_episode",
+    "wired": true,
+    "config_key": "randomize_spawns / randomize_food",
+    "note": "Whether the world changes between episodes (obstacle jitter, food/spawn location) IS controlled directly by these two boolean flags."
+  },
+
+  "state_space": {
+    "value": "continuous",
+    "wired": false,
+    "note": "Positions and headings are floats in a continuous 2D plane. True, but again emergent, not a switch -- see the 'grid discretization' module used later for goal-based search, CSP, and Q-learning, which is a separate, explicit abstraction layer we build on top."
+  },
+
+  "agents": {
+    "value": "single",
+    "wired": true,
+    "config_key": "num_agents",
+    "note": "This one is real: num_agents=1 for every agent type in this course level, except the predator-prey minimax module (later), which needs num_agents=2."
+  },
+
+  "map": {
+    "value": "default",
+    "wired": true,
+    "config_key": "map_name",
+    "note": "One of 'default', 'u_shape', 'n_shape'. Directly wired to ForagingEnvConfig.map_name."
+  },
+
+  "actuators": {
+    "value": ["forward", "left", "right", "reverse", "signal_or_wander"],
+    "wired": false,
+    "note": "Fixed action table baked into ForagingEnv._apply_action(); not configurable."
+  },
+
+  "sensors": {
+    "value": ["proximity_x8", "food_bearing", "odor"],
+    "wired": false,
+    "note": "The social_signal channel exists in the code but is deliberately turned off at this course level (social_mode='off' in edu_env.py), so it is NOT part of this level's percept even though the underlying environment supports it."
+  }
+}
