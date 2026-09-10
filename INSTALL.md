@@ -4,8 +4,8 @@
    tested against:
 
 ```bash
-   git clone --branch v1.0-course https://github.com/ferdiex/essim2d3d.git
-   cd essim2d3d
+   git clone --branch v1.0-course https://github.com/ferdiex/essim.git
+   cd essim
 ```
 
 2. Copy this whole `training_wheels/` folder into the cloned repo — as a
