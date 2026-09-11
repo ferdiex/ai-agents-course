@@ -37,6 +37,22 @@ the more robust fix in principle, since it would catch this regardless of
 how the grid's edges were built. Neither has been implemented or compared
 yet.
 
+**Correction, found by a real cross-machine test:** this was originally
+documented as "reliably reproduces the bug" — that overclaimed it.
+Reran 3x in this sandbox (Python 3.12) and got the identical stuck result
+every time (fully deterministic *within one environment*), but a
+different machine (Python 3.9, different numpy/numba versions) ran the
+exact same command and reached the food successfully. Since this is a
+borderline case — the robot's path GRAZES a wall rather than cleanly
+crossing or clearing it — tiny floating-point differences between Python/
+numpy/numba versions are enough to tip it either way. **`--spawn_seed 8`
+reliably reproduces the bug on some machines and not on others; it is not
+a universal repro.** Anyone using this for a classroom demo should verify
+on their own machine first, not assume it will trigger live. This doesn't
+change the diagnosis (the steering still has no reactive obstacle
+avoidance) — it just means the specific seed used to demonstrate it isn't
+portable across environments the way a normal fixed-seed repro would be.
+
 **Note for reproducing other cases:** both live-demo scripts now take
 `--spawn_seed` to fix the robot's starting position independently of
 training's `--seed`, specifically to make bugs like this reproducible on

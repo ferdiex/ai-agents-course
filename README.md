@@ -23,7 +23,7 @@ own docstring for why.
 
 | # | Agent type | Files | Try it |
 |---|---|---|---|
-| 1 | PEAS analysis | `peas_foraging.json` | read it; see the "wired" section below |
+| 1 | PEAS analysis | `peas_foraging.json` | read it; see the "wired" section below, and Activity 0 |
 | 2 | Table-driven | `agents/table_driven_agent.py` | `python3 agents/table_driven_agent.py` |
 | 3 | Simple reflex | `agents/simple_reflex_agent.py` | `python3 demo_level0_reflex.py --agent simple` |
 | 4 | Model-based reflex | `agents/model_based_reflex_agent.py` | `python3 demo_level0_reflex.py --agent model_based` |
@@ -34,10 +34,15 @@ own docstring for why.
 | 9 | Learning: Q-learning | `qlearning.py`, `visualize_qlearning.py`, `demo_qlearning_live.py` | `python3 demo_qlearning_live.py --episodes 2000` |
 | 10 | Learning: GA | `ga_learning.py`, `visualize_ga.py`, `visualize_ga_population.py`, `demo_ga_live.py` | `python3 demo_ga_live.py --generations 100` |
 
-Course exercises with student + teacher sections for all 6 activities
-(table-driven, reflex comparison, CSP, minimax, Q-learning, GA vs.
-Q-learning) are in `exercises/AI_Agents_Exercises.docx`. Open issues and
-things flagged but not yet resolved are tracked in `STATUS.md`, not here.
+Course exercises with student + teacher sections for all **7** activities
+(PEAS wired-vs-narrative, table-driven, reflex comparison, CSP, minimax,
+Q-learning, GA vs. Q-learning) are in `exercises/AI_Agents_Exercises.docx`.
+`EXERCISES_COMMANDS.md` has just the commands for each activity, without
+the pedagogical framing, for quick copy-paste during class. Open issues
+and things flagged but not yet resolved are tracked in `STATUS.md`, not
+here. **`CHANGELOG.md` lists exactly which files changed and why, entry
+by entry — check it after this package is updated instead of re-diffing
+everything by hand.**
 
 ## Installation
 
@@ -133,13 +138,13 @@ Every PEAS field carries a `"wired"` flag:
   in the code that controls it -- it is an emergent property of how
   `foraging_env.py` was written, not a parameter.
 
-**Suggested classroom exercise**: before looking at the code, have students
-guess `"wired": true/false` for each field on their own, then have them
-verify by reading `edu_env.py` (short) and, only if they want to confirm
-the "false" ones, `foraging_env.py` (long). The point isn't memorizing the
-answer key -- it's practicing "verify against the source" instead of
-trusting a description (from a professor, a teammate, or an AI) at face
-value.
+**This is Activity 0** in `exercises/AI_Agents_Exercises.docx`: before
+looking at the code, students guess `"wired": true/false` for each field
+on their own, then verify by reading `edu_env.py` (short) and, only if
+they want to confirm the "false" ones, `foraging_env.py` (long). The
+point isn't memorizing the answer key -- it's practicing "verify against
+the source" instead of trusting a description (from a professor, a
+teammate, or an AI) at face value.
 
 This distinction also opens a real discussion: Russell & Norvig describe
 properties like observability as categorical properties of an environment.
